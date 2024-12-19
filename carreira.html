@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoFut - Carreira do Jogador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #39ff14;
+            --background-color: #000;
+            --text-color: #fff;
+            --card-bg-opacity: 0.8;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .player-card {
+            width: 80%;
+            margin: 20px auto;
+            background-color: rgba(0, 0, 0, var(--card-bg-opacity));
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .player-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+        }
+
+        .player-card h2 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .player-card p {
+            margin: 5px 0;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .navigation button {
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navigation button:hover {
+            background-color: #28c011;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Carreira do Jogador</h1>
+        <div class="player-card" id="player-card">
+            <img src="player.jpg" alt="Jogador">
+            <h2 id="player-name">Nome do Jogador</h2>
+            <p id="player-team">Time: Santos FC</p>
+            <p id="player-info">Especificações da época (Ex.: Gols: 24 | Assistências: 18)</p>
+        </div>
+        <div class="navigation">
+            <button onclick="previousTeam()">&#9664; Anterior</button>
+            <button onclick="nextTeam()">Próximo &#9654;</button>
+        </div>
+    </div>
+
+    <script>
+        // Dados fictícios para demonstração
+        const playerData = [
+            {
+                name: "Jogador Exemplo",
+                team: "Santos FC",
+                info: "Gols: 24 | Assistências: 18",
+                image: "santos.jpg"
+            },
+            {
+                name: "Jogador Exemplo",
+                team: "Barcelona",
+                info: "Gols: 45 | Assistências: 32",
+                image: "barcelona.jpg"
+            },
+            {
+                name: "Jogador Exemplo",
+                team: "PSG",
+                info: "Gols: 80 | Assistências: 50",
+                image: "psg.jpg"
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function updateCard() {
+            const card = document.getElementById('player-card');
+            const playerName = document.getElementById('player-name');
+            const playerTeam = document.getElementById('player-team');
+            const playerInfo = document.getElementById('player-info');
+
+            const player = playerData[currentIndex];
+
+            card.querySelector('img').src = player.image;
+            playerName.textContent = player.name;
+            playerTeam.textContent = `Time: ${player.team}`;
+            playerInfo.textContent = player.info;
+        }
+
+        function previousTeam() {
+            currentIndex = (currentIndex === 0) ? playerData.length - 1 : currentIndex - 1;
+            updateCard();
+        }
+
+        function nextTeam() {
+            currentIndex = (currentIndex === playerData.length - 1) ? 0 : currentIndex + 1;
+            updateCard();
+        }
+
+        // Inicialização
+        updateCard();
+    </script>
+</body>
+</html>
 
